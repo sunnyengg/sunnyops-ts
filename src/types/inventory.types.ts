@@ -28,6 +28,7 @@ export interface StockMovement {
   item_name: string;
   type: StockMovementType;
   qty: number;
+  site?: string;
   from_site?: string;
   to_site?: string;
   reason?: string;
