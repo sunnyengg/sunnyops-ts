@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { colors } from '@/styles/tokens';
 
 export interface TabDef {
   key: string;
@@ -8,36 +10,42 @@ export interface TabDef {
 
 interface TopNavProps {
   tabs: TabDef[];
-  activeTab: string;
-  onTabChange: (key: string) => void;
 }
 
-export const TopNav: React.FC<TopNavProps> = ({ tabs, activeTab, onTabChange }) => (
-  <div style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0', overflowX: 'auto' }}>
-    <div style={{ maxWidth: 1400, margin: '0 auto', display: 'flex', gap: 2, padding: '8px 20px', background: '#f1f5f9' }}>
-      {tabs.map(({ key, label }) => (
-        <button
-          key={key}
-          onClick={() => onTabChange(key)}
-          className="mono"
-          style={{
-            padding: '7px 14px',
-            borderRadius: 5,
-            fontWeight: 700,
-            fontSize: 11,
-            letterSpacing: 1,
-            textTransform: 'uppercase',
-            cursor: 'pointer',
-            border: 'none',
-            background: activeTab === key ? '#f97316' : 'transparent',
-            color: activeTab === key ? '#fff' : '#64748b',
-            transition: 'all 0.15s',
-            whiteSpace: 'nowrap'
-          }}
-        >
-          {label}
-        </button>
-      ))}
+export const TopNav: React.FC<TopNavProps> = ({ tabs }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Extract the active tab key from the current path (e.g. "/bills" -> "bills")
+  const activeTab = location.pathname.replace('/', '') || 'dashboard';
+
+  return (
+    <div style={{ background: colors.surface, borderBottom: `1px solid ${colors.border}`, overflowX: 'auto' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', display: 'flex', gap: 2, padding: '8px 20px', background: colors.slate100 }}>
+        {tabs.map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => navigate(`/${key}`)}
+            className="mono"
+            style={{
+              padding: '7px 14px',
+              borderRadius: 5,
+              fontWeight: 700,
+              fontSize: 11,
+              letterSpacing: 1,
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              border: 'none',
+              background: activeTab === key ? colors.brand : 'transparent',
+              color: activeTab === key ? colors.surface : colors.textSecondary,
+              transition: 'all 0.15s',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};

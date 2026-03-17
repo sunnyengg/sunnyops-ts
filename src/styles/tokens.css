@@ -1,0 +1,104 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SUNNY OPS — Design Tokens (Single Source of Truth)
+   All colors, spacing, and typography tokens live here as CSS custom
+   properties.  Components reference these via var(--token-name).
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Brand ─────────────────────────────────────────────────────── */
+  --color-brand:             #f97316;
+  --color-brand-hover:       #ea580c;
+  --color-brand-light:       #fff7ed;
+  --color-brand-border:      #fed7aa;
+
+  /* ── Slate / Neutrals ─────────────────────────────────────────── */
+  --color-slate-50:          #f8fafc;
+  --color-slate-100:         #f1f5f9;
+  --color-slate-200:         #e2e8f0;
+  --color-slate-300:         #cbd5e1;
+  --color-slate-400:         #94a3b8;
+  --color-slate-500:         #64748b;
+  --color-slate-600:         #475569;
+  --color-slate-700:         #334155;
+  --color-slate-800:         #1e293b;
+  --color-slate-900:         #0f172a;
+
+  /* ── Semantic: Success (Green) ─────────────────────────────────── */
+  --color-success:           #16a34a;
+  --color-success-dark:      #15803d;
+  --color-success-bg:        #f0fdf4;
+  --color-success-border:    #bbf7d0;
+  --color-success-border-md: #86efac;
+
+  /* ── Semantic: Danger (Red) ────────────────────────────────────── */
+  --color-danger:            #dc2626;
+  --color-danger-bg:         #fef2f2;
+  --color-danger-border:     #fecaca;
+  --color-danger-bg-alt:     #fff1f2;
+  --color-danger-border-alt: #fecdd3;
+  --color-danger-bg-light:   #fff8f8;
+
+  /* ── Semantic: Warning (Amber/Yellow) ──────────────────────────── */
+  --color-warning:           #d97706;
+  --color-warning-dark:      #92400e;
+  --color-warning-bg:        #fffbeb;
+  --color-warning-border:    #fcd34d;
+  --color-warning-border-sm: #fde68a;
+  --color-warning-bg-light:  #fef3c7;
+
+  /* ── Semantic: Info (Blue) ─────────────────────────────────────── */
+  --color-info:              #1d4ed8;
+  --color-info-bg:           #eff6ff;
+  --color-info-border:       #bfdbfe;
+  --color-info-light:        #f0f9ff;
+  --color-info-border-light: #bae6fd;
+  --color-info-dark:         #0369a1;
+
+  /* ── Semantic: Indigo / Purple ─────────────────────────────────── */
+  --color-indigo:            #4338ca;
+  --color-indigo-bg:         #f0f4ff;
+  --color-indigo-border:     #c7d2fe;
+  --color-indigo-dark:       #3730a3;
+
+  --color-violet:            #7c3aed;
+  --color-violet-bg:         #f5f3ff;
+  --color-violet-border:     #ddd6fe;
+  --color-violet-bg-alt:     #fdf4ff;
+  --color-violet-border-alt: #e9d5ff;
+
+  /* ── External Brand Colors ─────────────────────────────────────── */
+  --color-whatsapp:          #25D366;
+
+  /* ── Surface & Background ──────────────────────────────────────── */
+  --color-surface:           #ffffff;
+  --color-page-bg:           var(--color-slate-50);
+  --color-header-bg:         var(--color-slate-900);
+  --color-border:            var(--color-slate-200);
+  --color-border-light:      var(--color-slate-100);
+  --color-text-primary:      var(--color-slate-900);
+  --color-text-secondary:    var(--color-slate-500);
+  --color-text-muted:        var(--color-slate-400);
+  --color-text-on-dark:      var(--color-slate-400);
+
+  /* ── Typography ────────────────────────────────────────────────── */
+  --font-mono:               'IBM Plex Mono', monospace;
+  --font-sans:               -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* ── Radii ─────────────────────────────────────────────────────── */
+  --radius-sm:               4px;
+  --radius-md:               6px;
+  --radius-lg:               8px;
+  --radius-xl:               10px;
+  --radius-2xl:              12px;
+  --radius-3xl:              16px;
+  --radius-full:             9999px;
+
+  /* ── Shadows ───────────────────────────────────────────────────── */
+  --shadow-sm:               0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:               0 4px 12px rgba(0,0,0,.1);
+  --shadow-lg:               0 20px 60px rgba(0,0,0,.2);
+  --shadow-overlay:          rgba(15, 23, 42, 0.5);
+
+  /* ── Transitions ───────────────────────────────────────────────── */
+  --transition-fast:         all 0.15s ease;
+}

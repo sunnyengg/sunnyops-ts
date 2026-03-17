@@ -1,12 +1,15 @@
 import React, { useState, useCallback } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useRealtime } from '@/hooks/useRealtime';
 import { AuthScreen } from '@/modules/auth/AuthScreen';
 import { TopNav } from '@/components/layout/TopNav';
 import type { TabDef } from '@/components/layout/TopNav';
 import { Toast, Spinner } from '@/components/ui';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 import { ADMIN_EMAIL } from '@/config/constants';
 import { hasPerm } from '@/config/roles';
+import { colors, fonts } from '@/styles/tokens';
 
 const DashboardTab   = React.lazy(() => import('@/modules/dashboard/DashboardTab').then(m => ({ default: m.DashboardTab })));
 const InventoryTab   = React.lazy(() => import('@/modules/inventory/InventoryTab').then(m => ({ default: m.InventoryTab })));
@@ -25,7 +28,6 @@ interface ToastState { msg: string; type?: 'ok' | 'err' }
 
 export const App: React.FC = () => {
   const auth = useAuth();
-  const [tab, setTab] = useState('dashboard');
   const [toast, setToast] = useState<ToastState | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -69,51 +71,55 @@ export const App: React.FC = () => {
   const assignedSites = (isMD || auth.userRole === 'store-manager') ? auth.assignedSites : undefined;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f8fafc' }}>
+    <div style={{ minHeight: '100vh', background: colors.pageBg }}>
       {/* Header */}
-      <div style={{ background: '#0f172a', color: '#fff', padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
+      <div style={{ background: colors.headerBg, color: colors.surface, padding: '12px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
         <div>
-          <div style={{ fontFamily: 'IBM Plex Mono, monospace', fontWeight: 700, fontSize: 16, color: '#f97316' }}>SUNNY OPS</div>
-          <div style={{ fontSize: 9, color: '#94a3b8', letterSpacing: 2, fontFamily: 'IBM Plex Mono, monospace' }}>OPERATIONS & FINANCE</div>
+          <div style={{ fontFamily: fonts.mono, fontWeight: 700, fontSize: 16, color: colors.brand }}>SUNNY OPS</div>
+          <div style={{ fontSize: 9, color: colors.textOnDark, letterSpacing: 2, fontFamily: fonts.mono }}>OPERATIONS & FINANCE</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 30, height: 30, background: isMD ? '#4338ca' : '#f97316', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#fff', fontWeight: 700 }}>
+          <div style={{ width: 30, height: 30, background: isMD ? colors.indigo : colors.brand, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: colors.surface, fontWeight: 700 }}>
             {auth.userName.charAt(0).toUpperCase()}
           </div>
           <div>
-            <div style={{ color: '#94a3b8', fontSize: 12 }}>{auth.userName}</div>
+            <div style={{ color: colors.textOnDark, fontSize: 12 }}>{auth.userName}</div>
             {isMD && auth.assignedSites.length > 0 && (
-              <span style={{ background: '#3730a3', color: '#c7d2fe', borderRadius: 4, padding: '1px 7px', fontSize: 9, fontWeight: 700, fontFamily: 'IBM Plex Mono, monospace' }}>
+              <span style={{ background: colors.indigoDark, color: colors.indigoBorder, borderRadius: 4, padding: '1px 7px', fontSize: 9, fontWeight: 700, fontFamily: fonts.mono }}>
                 MD — {auth.assignedSites.join(', ')}
               </span>
             )}
           </div>
-          <button onClick={auth.signOut} style={{ background: '#1e293b', border: '1px solid #334155', color: '#94a3b8', borderRadius: 6, padding: '5px 12px', fontSize: 10, cursor: 'pointer', fontFamily: 'IBM Plex Mono, monospace', fontWeight: 700, letterSpacing: 1 }}>Sign Out</button>
+          <button onClick={auth.signOut} style={{ background: colors.slate800, border: `1px solid ${colors.slate700}`, color: colors.textOnDark, borderRadius: 6, padding: '5px 12px', fontSize: 10, cursor: 'pointer', fontFamily: fonts.mono, fontWeight: 700, letterSpacing: 1 }}>Sign Out</button>
         </div>
       </div>
       
       {/* Top nav */}
-      <TopNav tabs={TABS} activeTab={tab} onTabChange={setTab} />
+      <TopNav tabs={TABS} />
 
       {/* Content */}
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '20px' }}>
-        <React.Suspense fallback={<Spinner />}>
-          {tab === 'dashboard'   && <DashboardTab   key={refreshKey} assignedSites={assignedSites} isDirector={auth.userRole === 'director' || isMD} isAdmin={isAdmin} uName={auth.userName} userRole={auth.userRole} getPerm={getPerm} showToast={showToast} />}
-          {tab === 'inventory'   && <InventoryTab   key={refreshKey} isAdmin={isAdmin} uName={auth.userName} showToast={showToast} />}
-          {tab === 'store'       && <StoreTab       key={refreshKey} isAdmin={isAdmin} uName={auth.userName} assignedSites={assignedSites} showToast={showToast} />}
-          {tab === 'bills'       && <BillsTab       key={refreshKey} isAdmin={isAdmin} uName={auth.userName} userRole={auth.userRole} assignedSites={assignedSites} showToast={showToast} />}
-          {tab === 'payables'    && <PayablesTab />}
-          {tab === 'challans'    && <ChallansTab isAdmin={isAdmin} showToast={showToast} />}
-          {tab === 'requests'    && <SiteRequestsTab />}
-          {tab === 'logs'        && <LogsTab />}
-          {tab === 'activity'    && <ActivityTab />}
-          {tab === 'procurement' && <ProcurementTab />}
-          {tab === 'hr'          && <HRTab          key={refreshKey} isAdmin={isAdmin} uName={auth.userName} userRole={auth.userRole} showToast={showToast} />}
-          {tab === 'settings'    && isAdmin && <SettingsTab key={refreshKey} />}
-        </React.Suspense>
+        <ErrorBoundary>
+          <React.Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route path="/dashboard" element={<DashboardTab key={refreshKey} assignedSites={assignedSites} isDirector={auth.userRole === 'director' || isMD} isAdmin={isAdmin} uName={auth.userName} userRole={auth.userRole} getPerm={getPerm} showToast={showToast} />} />
+              <Route path="/inventory" element={<InventoryTab key={refreshKey} isAdmin={isAdmin} uName={auth.userName} showToast={showToast} />} />
+              <Route path="/store" element={<StoreTab key={refreshKey} isAdmin={isAdmin} uName={auth.userName} assignedSites={assignedSites} showToast={showToast} />} />
+              <Route path="/bills" element={<BillsTab key={refreshKey} isAdmin={isAdmin} uName={auth.userName} userRole={auth.userRole} assignedSites={assignedSites} showToast={showToast} />} />
+              <Route path="/payables" element={<PayablesTab />} />
+              <Route path="/challans" element={<ChallansTab isAdmin={isAdmin} showToast={showToast} />} />
+              <Route path="/requests" element={<SiteRequestsTab />} />
+              <Route path="/logs" element={<LogsTab />} />
+              <Route path="/activity" element={<ActivityTab />} />
+              <Route path="/procurement" element={<ProcurementTab />} />
+              <Route path="/hr" element={<HRTab key={refreshKey} isAdmin={isAdmin} uName={auth.userName} userRole={auth.userRole} showToast={showToast} />} />
+              {isAdmin && <Route path="/settings" element={<SettingsTab key={refreshKey} />} />}
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            </Routes>
+          </React.Suspense>
+        </ErrorBoundary>
       </div>
-
-
 
       {/* Toast */}
       {toast && <Toast message={toast.msg} type={toast.type} onClose={() => setToast(null)} />}

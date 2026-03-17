@@ -1,3 +1,5 @@
+import { colors } from '@/styles/tokens';
+
 export const ADMIN_EMAIL = 'john@sunnyengg.com';
 export const APP_VERSION = 'v2.0.0-ts';
 
@@ -53,11 +55,11 @@ export const RECRUITMENT_STAGES = [
 ] as const;
 
 export const STAGE_COLOURS: Record<string, { bg: string; c: string; br: string }> = {
-  'Screening':    { bg: '#eff6ff', c: '#1d4ed8', br: '#bfdbfe' },
-  'Interview':    { bg: '#fffbeb', c: '#92400e', br: '#fcd34d' },
-  'Offer Sent':   { bg: '#f0fdf4', c: '#15803d', br: '#bbf7d0' },
-  'Joined':       { bg: '#f5f3ff', c: '#6d28d9', br: '#ddd6fe' },
-  'Not Selected': { bg: '#fef2f2', c: '#dc2626', br: '#fecaca' },
+  'Screening':    { bg: colors.infoBg,     c: colors.info,        br: colors.infoBorder },
+  'Interview':    { bg: colors.warningBg,  c: colors.warningDark, br: colors.warningBorder },
+  'Offer Sent':   { bg: colors.successBg,  c: colors.successDark, br: colors.successBorder },
+  'Joined':       { bg: colors.violetBg,   c: colors.violet,      br: colors.violetBorder },
+  'Not Selected': { bg: colors.dangerBg,   c: colors.danger,      br: colors.dangerBorder },
 };
 
 export const PAYABLE_CATEGORIES = [
@@ -113,11 +115,11 @@ export const EI_UNITS = ['LS', 'Job', 'MT', 'M3', 'Nos', 'RMT', 'Mtr', 'Sqm', 'C
 export const EI_STATUSES = ['Draft', 'Submitted', 'IRN Obtained', 'Pushed to Bills', 'Cancelled'] as const;
 
 export const EI_STATUS_COLORS: Record<string, { bg: string; c: string; br: string }> = {
-  'Draft':           { bg: '#f1f5f9', c: '#475569', br: '#cbd5e1' },
-  'Submitted':       { bg: '#eff6ff', c: '#1d4ed8', br: '#bfdbfe' },
-  'IRN Obtained':    { bg: '#f0fdf4', c: '#16a34a', br: '#bbf7d0' },
-  'Pushed to Bills': { bg: '#fff7ed', c: '#c2410c', br: '#fed7aa' },
-  'Cancelled':       { bg: '#fef2f2', c: '#dc2626', br: '#fecaca' },
+  'Draft':           { bg: colors.slate100,   c: colors.slate600,  br: colors.slate300 },
+  'Submitted':       { bg: colors.infoBg,     c: colors.info,      br: colors.infoBorder },
+  'IRN Obtained':    { bg: colors.successBg,  c: colors.success,   br: colors.successBorder },
+  'Pushed to Bills': { bg: colors.brandLight,  c: colors.brandHover, br: colors.brandBorder },
+  'Cancelled':       { bg: colors.dangerBg,   c: colors.danger,    br: colors.dangerBorder },
 };
 
 // ── CN/DN Constants ──────────────────────────────────────────────────
@@ -125,10 +127,10 @@ export const EI_STATUS_COLORS: Record<string, { bg: string; c: string; br: strin
 export const CDN_STATUSES = ['Draft', 'Submitted', 'IRN Obtained', 'Cancelled'] as const;
 
 export const CDN_STATUS_COLORS: Record<string, { bg: string; c: string; br: string }> = {
-  'Draft':        { bg: '#f1f5f9', c: '#475569', br: '#cbd5e1' },
-  'Submitted':    { bg: '#eff6ff', c: '#1d4ed8', br: '#bfdbfe' },
-  'IRN Obtained': { bg: '#f0fdf4', c: '#16a34a', br: '#bbf7d0' },
-  'Cancelled':    { bg: '#fef2f2', c: '#dc2626', br: '#fecaca' },
+  'Draft':        { bg: colors.slate100,   c: colors.slate600,  br: colors.slate300 },
+  'Submitted':    { bg: colors.infoBg,     c: colors.info,      br: colors.infoBorder },
+  'IRN Obtained': { bg: colors.successBg,  c: colors.success,   br: colors.successBorder },
+  'Cancelled':    { bg: colors.dangerBg,   c: colors.danger,    br: colors.dangerBorder },
 };
 
 export const CDN_REASONS = [
@@ -144,18 +146,18 @@ export const CDN_REASONS = [
 export const PO_STATUSES = ['Draft', 'Pending Purchase', 'Ordered', 'Received', 'Cancelled'] as const;
 
 export const PO_STATUS_COLORS: Record<string, { bg: string; c: string; br: string }> = {
-  'Draft': { bg: '#f1f5f9', c: '#475569', br: '#cbd5e1' },
-  'Pending Purchase': { bg: '#fffbeb', c: '#92400e', br: '#fcd34d' },
-  'Ordered': { bg: '#eff6ff', c: '#1d4ed8', br: '#bfdbfe' },
-  'Received': { bg: '#f0fdf4', c: '#16a34a', br: '#bbf7d0' },
-  'Cancelled': { bg: '#fef2f2', c: '#dc2626', br: '#fecaca' },
+  'Draft':            { bg: colors.slate100,   c: colors.slate600,    br: colors.slate300 },
+  'Pending Purchase': { bg: colors.warningBg,  c: colors.warningDark, br: colors.warningBorder },
+  'Ordered':          { bg: colors.infoBg,     c: colors.info,        br: colors.infoBorder },
+  'Received':         { bg: colors.successBg,  c: colors.success,     br: colors.successBorder },
+  'Cancelled':        { bg: colors.dangerBg,   c: colors.danger,      br: colors.dangerBorder },
 };
 
 export const QUT_STATUSES = ['Draft', 'Sent', 'Accepted', 'Rejected'] as const;
 
 export const QUT_COLORS: Record<string, { bg: string; c: string; br: string }> = {
-  'Draft': { bg: '#f1f5f9', c: '#475569', br: '#cbd5e1' },
-  'Sent': { bg: '#eff6ff', c: '#1d4ed8', br: '#bfdbfe' },
-  'Accepted': { bg: '#f0fdf4', c: '#16a34a', br: '#bbf7d0' },
-  'Rejected': { bg: '#fef2f2', c: '#dc2626', br: '#fecaca' },
+  'Draft':    { bg: colors.slate100,   c: colors.slate600,  br: colors.slate300 },
+  'Sent':     { bg: colors.infoBg,     c: colors.info,      br: colors.infoBorder },
+  'Accepted': { bg: colors.successBg,  c: colors.success,   br: colors.successBorder },
+  'Rejected': { bg: colors.dangerBg,   c: colors.danger,    br: colors.dangerBorder },
 };

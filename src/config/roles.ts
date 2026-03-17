@@ -1,4 +1,5 @@
 import type { UserRole, PermissionKey, RolePermissions, AllRolePermissions } from '@/types/user.types';
+import { colors } from '@/styles/tokens';
 
 export const ALL_ROLES: UserRole[] = [
   'staff', 'supervisor', 'inv-manager', 'fin-manager',
@@ -20,16 +21,16 @@ export const ROLE_LABELS: Record<UserRole, string> = {
 };
 
 export const ROLE_BADGE: Record<UserRole, { bg: string; br: string; c: string; label: string }> = {
-  admin:               { bg: '#fff7ed', br: '#fed7aa', c: '#ea580c', label: 'ADMIN' },
-  director:            { bg: '#fdf4ff', br: '#e9d5ff', c: '#7c3aed', label: 'DIRECTOR' },
-  'managing-director': { bg: '#f0f4ff', br: '#c7d2fe', c: '#4338ca', label: 'MANAGING DIR' },
-  'fin-manager':       { bg: '#eff6ff', br: '#bfdbfe', c: '#1d4ed8', label: 'FIN.MGR' },
-  'inv-manager':       { bg: '#f0fdf4', br: '#bbf7d0', c: '#15803d', label: 'INV.MGR' },
-  planning_dept:       { bg: '#f0fdf4', br: '#86efac', c: '#16a34a', label: 'PLANNING' },
-  accounts:            { bg: '#fef3c7', br: '#fde68a', c: '#d97706', label: 'ACCOUNTS' },
-  supervisor:          { bg: '#f0f9ff', br: '#bae6fd', c: '#0369a1', label: 'SUPERVISOR' },
-  'store-manager':     { bg: '#fff7ed', br: '#fed7aa', c: '#ea580c', label: 'STORE MGR' },
-  staff:               { bg: '#f8fafc', br: '#e2e8f0', c: '#64748b', label: 'STAFF' },
+  admin:               { bg: colors.brandLight,   br: colors.brandBorder,    c: colors.brandHover,  label: 'ADMIN' },
+  director:            { bg: colors.violetBgAlt,  br: colors.violetBorderAlt, c: colors.violet,     label: 'DIRECTOR' },
+  'managing-director': { bg: colors.indigoBg,     br: colors.indigoBorder,   c: colors.indigo,      label: 'MANAGING DIR' },
+  'fin-manager':       { bg: colors.infoBg,       br: colors.infoBorder,     c: colors.info,        label: 'FIN.MGR' },
+  'inv-manager':       { bg: colors.successBg,    br: colors.successBorder,  c: colors.successDark, label: 'INV.MGR' },
+  planning_dept:       { bg: colors.successBg,    br: colors.successBorderMd, c: colors.success,    label: 'PLANNING' },
+  accounts:            { bg: colors.warningBgLight, br: colors.warningBorderSm, c: colors.warning,  label: 'ACCOUNTS' },
+  supervisor:          { bg: colors.infoLight,    br: colors.infoBorderLight, c: colors.infoDark,    label: 'SUPERVISOR' },
+  'store-manager':     { bg: colors.brandLight,   br: colors.brandBorder,    c: colors.brandHover,  label: 'STORE MGR' },
+  staff:               { bg: colors.slate50,      br: colors.border,         c: colors.textSecondary, label: 'STAFF' },
 };
 
 export const SITE_RESTRICTED_ROLES: UserRole[] = ['store-manager', 'managing-director'];

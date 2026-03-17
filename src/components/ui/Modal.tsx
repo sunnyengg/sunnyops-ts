@@ -1,4 +1,5 @@
 import React from 'react';
+import { colors } from '@/styles/tokens';
 
 interface ModalProps {
   title: React.ReactNode;
@@ -25,9 +26,9 @@ export const Modal: React.FC<ModalProps> = ({ title, onClose, wide = false, chil
     <div
       onClick={e => e.stopPropagation()}
       style={{
-        background: '#fff',
+        background: colors.surface,
         borderRadius: 12,
-        border: '1px solid #e2e8f0',
+        border: `1px solid ${colors.border}`,
         width: '100%',
         maxWidth: wide ? 900 : 500,
         boxShadow: '0 20px 60px rgba(0,0,0,.2)',
@@ -35,14 +36,14 @@ export const Modal: React.FC<ModalProps> = ({ title, onClose, wide = false, chil
     >
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '16px 20px', borderBottom: '1px solid #e2e8f0',
+        padding: '16px 20px', borderBottom: `1px solid ${colors.border}`,
       }}>
-        <div style={{ fontWeight: 800, fontSize: 15, color: '#0f172a' }}>{title}</div>
+        <div style={{ fontWeight: 800, fontSize: 15, color: colors.textPrimary }}>{title}</div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           {headerActions}
           <button
             onClick={onClose}
-            style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: '#94a3b8' }}
+            style={{ background: 'none', border: 'none', fontSize: 20, cursor: 'pointer', color: colors.textMuted }}
           >×</button>
         </div>
       </div>

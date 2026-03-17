@@ -7,6 +7,7 @@ import {
   removeBiometric,
 } from '@/utils/biometric';
 import type { BiometricCredential } from '@/utils/biometric';
+import { colors, fonts } from '@/styles/tokens';
 
 interface AuthScreenProps {
   onSignIn: (email: string, password: string) => Promise<string | null>;
@@ -64,19 +65,19 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSignIn, onBiometricSig
 
   const inputStyle: React.CSSProperties = {
     width: '100%', boxSizing: 'border-box',
-    background: '#f8fafc', border: '1px solid #e2e8f0',
+    background: colors.slate50, border: `1px solid ${colors.border}`,
     borderRadius: 6, padding: '9px 12px',
-    fontFamily: 'inherit', fontSize: 13, color: '#0f172a',
+    fontFamily: 'inherit', fontSize: 13, color: colors.textPrimary,
   };
 
   // ── Biometric Setup Prompt ──────────────────────────────────────────
   if (showBioSetup && pendingUser) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', padding: 20 }}>
-        <div style={{ background: '#fff', borderRadius: 16, padding: '40px 32px', width: '100%', maxWidth: 380, textAlign: 'center', border: '1px solid #e2e8f0' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: colors.pageBg, padding: 20 }}>
+        <div style={{ background: colors.surface, borderRadius: 16, padding: '40px 32px', width: '100%', maxWidth: 380, textAlign: 'center', border: `1px solid ${colors.border}` }}>
           <div style={{ fontSize: 56, marginBottom: 16 }}>🔐</div>
           <div style={{ fontWeight: 800, fontSize: 17, marginBottom: 8 }}>Enable Biometric Login</div>
-          <div style={{ fontSize: 13, color: '#64748b', marginBottom: 28, lineHeight: 1.7 }}>
+          <div style={{ fontSize: 13, color: colors.textSecondary, marginBottom: 28, lineHeight: 1.7 }}>
             Use <strong>fingerprint or Face ID</strong> to sign in instantly next time.
           </div>
           <Button onClick={handleEnableBio} style={{ width: '100%', padding: '13px 0', marginBottom: 12, fontSize: 14 }}>
@@ -92,15 +93,15 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSignIn, onBiometricSig
 
   // ── Main Login Screen ───────────────────────────────────────────────
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', padding: 20 }}>
-      <div style={{ background: '#fff', border: '1px solid #e2e8f0', borderRadius: 16, padding: '40px 36px', width: '100%', maxWidth: 400 }}>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: colors.pageBg, padding: 20 }}>
+      <div style={{ background: colors.surface, border: `1px solid ${colors.border}`, borderRadius: 16, padding: '40px 36px', width: '100%', maxWidth: 400 }}>
 
         {/* Logo + Title */}
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <div style={{ fontWeight: 700, fontSize: 22, color: '#0f172a', fontFamily: 'IBM Plex Mono, monospace' }}>
+          <div style={{ fontWeight: 700, fontSize: 22, color: colors.textPrimary, fontFamily: fonts.mono }}>
             SUNNY OPS
           </div>
-          <div style={{ fontSize: 10, color: '#64748b', letterSpacing: 3, marginTop: 6, fontFamily: 'IBM Plex Mono, monospace' }}>
+          <div style={{ fontSize: 10, color: colors.textSecondary, letterSpacing: 3, marginTop: 6, fontFamily: fonts.mono }}>
             OPERATIONS & FINANCE MANAGEMENT
           </div>
         </div>
@@ -115,27 +116,27 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSignIn, onBiometricSig
             >
               🔐 Sign in with Biometric
             </Button>
-            <div style={{ textAlign: 'center', fontSize: 12, color: '#64748b', marginBottom: 12 }}>
+            <div style={{ textAlign: 'center', fontSize: 12, color: colors.textSecondary, marginBottom: 12 }}>
               Hi, <strong>{bioStored.userName}</strong> 👋
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-              <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
-              <span style={{ fontSize: 11, color: '#94a3b8' }}>or use password</span>
-              <div style={{ flex: 1, height: 1, background: '#e2e8f0' }} />
+              <div style={{ flex: 1, height: 1, background: colors.border }} />
+              <span style={{ fontSize: 11, color: colors.textMuted }}>or use password</span>
+              <div style={{ flex: 1, height: 1, background: colors.border }} />
             </div>
           </div>
         )}
 
         {/* Error */}
         {err && (
-          <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 8, padding: '10px 14px', color: '#dc2626', fontSize: 12, marginBottom: 14 }}>
+          <div style={{ background: colors.dangerBg, border: `1px solid ${colors.dangerBorder}`, borderRadius: 8, padding: '10px 14px', color: colors.danger, fontSize: 12, marginBottom: 14 }}>
             {err}
           </div>
         )}
 
         {/* Email */}
         <div style={{ marginBottom: 14 }}>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6, fontFamily: 'IBM Plex Mono, monospace', fontWeight: 700, letterSpacing: 1 }}>EMAIL</div>
+          <div style={{ fontSize: 11, color: colors.textSecondary, marginBottom: 6, fontFamily: fonts.mono, fontWeight: 700, letterSpacing: 1 }}>EMAIL</div>
           <input
             type="email"
             value={email}
@@ -147,7 +148,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSignIn, onBiometricSig
 
         {/* Password */}
         <div style={{ marginBottom: 20 }}>
-          <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6, fontFamily: 'IBM Plex Mono, monospace', fontWeight: 700, letterSpacing: 1 }}>PASSWORD</div>
+          <div style={{ fontSize: 11, color: colors.textSecondary, marginBottom: 6, fontFamily: fonts.mono, fontWeight: 700, letterSpacing: 1 }}>PASSWORD</div>
           <input
             type="password"
             value={pass}
@@ -167,7 +168,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSignIn, onBiometricSig
           <div style={{ textAlign: 'center', marginTop: 16 }}>
             <button
               onClick={() => { removeBiometric(); setBioStored(null); }}
-              style={{ background: 'none', border: 'none', color: '#94a3b8', fontSize: 11, cursor: 'pointer', textDecoration: 'underline' }}
+              style={{ background: 'none', border: 'none', color: colors.textMuted, fontSize: 11, cursor: 'pointer', textDecoration: 'underline' }}
             >
               Remove biometric from this device
             </button>

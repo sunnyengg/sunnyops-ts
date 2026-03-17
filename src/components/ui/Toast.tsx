@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { colors, fonts } from '@/styles/tokens';
 
 interface ToastProps {
   message: string;
@@ -16,11 +17,11 @@ export const Toast: React.FC<ToastProps> = ({ message, type = 'ok', onClose }) =
   return (
     <div style={{
       position: 'fixed', top: 16, right: 16, zIndex: 1000,
-      background: isErr ? '#fef2f2' : '#f0fdf4',
-      border: `1px solid ${isErr ? '#fecaca' : '#bbf7d0'}`,
-      color: isErr ? '#dc2626' : '#16a34a',
+      background: isErr ? colors.dangerBg : colors.successBg,
+      border: `1px solid ${isErr ? colors.dangerBorder : colors.successBorder}`,
+      color: isErr ? colors.danger : colors.success,
       borderRadius: 8, padding: '12px 20px',
-      fontFamily: 'IBM Plex Mono, monospace', fontSize: 12, fontWeight: 700,
+      fontFamily: fonts.mono, fontSize: 12, fontWeight: 700,
       boxShadow: '0 4px 12px rgba(0,0,0,.1)',
       maxWidth: 320,
     }}>

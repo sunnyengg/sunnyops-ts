@@ -1,4 +1,5 @@
 import React from 'react';
+import { colors } from '@/styles/tokens';
 
 interface BottomSheetProps {
   onClose: () => void;
@@ -18,7 +19,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ onClose, children }) =
     <div
       onClick={e => e.stopPropagation()}
       style={{
-        background: '#fff',
+        background: colors.surface,
         borderRadius: '20px 20px 0 0',
         maxHeight: '80vh',
         overflowY: 'auto',
@@ -27,7 +28,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({ onClose, children }) =
     >
       {/* Drag handle */}
       <div style={{ textAlign: 'center', padding: '10px 0 0' }}>
-        <div style={{ width: 40, height: 4, background: '#e2e8f0', borderRadius: 2, margin: '0 auto' }} />
+        <div style={{ width: 40, height: 4, background: colors.border, borderRadius: 2, margin: '0 auto' }} />
       </div>
       {children}
     </div>

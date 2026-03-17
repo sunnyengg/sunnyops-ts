@@ -1,4 +1,5 @@
 import React from 'react';
+import { colors, fonts } from '@/styles/tokens';
 
 type ButtonVariant = 'primary' | 'ghost' | 'danger' | 'info' | 'success';
 
@@ -9,11 +10,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const VARIANT_STYLES: Record<ButtonVariant, React.CSSProperties> = {
-  primary: { background: '#f97316', color: '#fff',    border: '1px solid #f97316' },
-  ghost:   { background: '#f1f5f9', color: '#374151', border: '1px solid #e2e8f0' },
-  danger:  { background: '#fef2f2', color: '#dc2626', border: '1px solid #fecaca' },
-  info:    { background: '#eff6ff', color: '#1d4ed8', border: '1px solid #bfdbfe' },
-  success: { background: '#f0fdf4', color: '#16a34a', border: '1px solid #bbf7d0' },
+  primary: { background: colors.brand,     color: colors.surface,     border: `1px solid ${colors.brand}` },
+  ghost:   { background: colors.slate100,  color: colors.slate600,    border: `1px solid ${colors.border}` },
+  danger:  { background: colors.dangerBg,  color: colors.danger,      border: `1px solid ${colors.dangerBorder}` },
+  info:    { background: colors.infoBg,    color: colors.info,        border: `1px solid ${colors.infoBorder}` },
+  success: { background: colors.successBg, color: colors.success,     border: `1px solid ${colors.successBorder}` },
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -32,7 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
       padding: '8px 16px',
       fontWeight: 700,
       fontSize: 11,
-      fontFamily: 'IBM Plex Mono, monospace',
+      fontFamily: fonts.mono,
       letterSpacing: 1,
       cursor: disabled || loading ? 'not-allowed' : 'pointer',
       opacity: disabled || loading ? 0.6 : 1,
