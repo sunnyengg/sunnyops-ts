@@ -8,3 +8,4 @@ dist/
 coverage/
 old-working-version/
 .vercel
+.env.vercel
